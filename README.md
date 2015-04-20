@@ -56,3 +56,6 @@ will change your own ID to 23.
 ```
 
 will change the recipent ID to 24.
+
+## Broadcasts
+When setting the destination ID to 255, the sent message will be broadcasted to all reachable nodes. Note that with non broadcast addresses RadioHead does wait for confirmation on th received message from the destination. This does not apply for broadcast messages, you won't get a notification if the message reached a node.
