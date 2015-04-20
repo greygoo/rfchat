@@ -16,6 +16,15 @@ Hardware requirement is a module supported by the RF22 driver (e.g. RF2M23BP fro
 7. Run `make upload`
 8. Open a serial console to the arduino
 
+### using the Arduino IDE
+1. Copy rfchat.ino to your sketchbook directory
+2. Install RadioHead library
+3. Open rfchat.ino in the Arduino IDE
+4. Select compile in the Arduino IDE
+5. Connect the Arduino
+6. Upload rfchat to the Arduino using the IDE
+
+
 ## Usage
 After booting on the arduino you can connect to its serial port and simply type strings that then will be sent via the attached rf device. You will see the sent text prefixed with an indicator which ID you have and which ID the message is sent to, like e.g.
 
