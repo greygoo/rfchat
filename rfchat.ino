@@ -1,6 +1,7 @@
 #include <RHReliableDatagram.h>
 #include <RH_RF22.h>
 #include <SPI.h>
+#include "rfchat.h"
 
 // Define max size per sent packet
 #define DEBUG true

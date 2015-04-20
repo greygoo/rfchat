@@ -5,6 +5,17 @@ A simple application for the arduino to use [RadioHead|https://github.com/PaulSt
 ## Hardware
 Hardware requirement is a module supported by the RF22 driver (e.g. RF2M23BP from HopeRF). For other rf modules supported by RdaioHead you have to adjust the line initializing the driver accordingly.
 
+## Setup
+### Command line
+1. Install crosscompile toolchain
+2. Install arduino libs
+3. install the RadioHead library
+4. Set the arduino board in the Makefile
+5. Run `make` to build rfchat
+6. Connect the arduino
+7. Run `make upload`
+8. Open a serial console to the arduino
+
 ## Usage
 After booting on the arduino you can connect to its serial port and simply type strings that then will be sent via the attached rf device. You will see the sent text prefixed with an indicator which ID you have and which ID the message is sent to, like e.g.
 
