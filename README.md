@@ -7,7 +7,7 @@ Hardware requirement is a module supported by the RF22 driver (e.g. RF2M23BP fro
 
 ## Connection diagram
 This is based on the documention of RadioHead
-[pictures/RFM23BP_connection.png]
+![arduino connection to RF module](pictures/RFM23BP_connection.png "RFM23BP connection")
 
 ## Setup
 ### Command line
