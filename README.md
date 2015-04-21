@@ -1,9 +1,13 @@
 # rfchat
 
-A simple application for the arduino to use [RadioHead|https://github.com/PaulStoffregen/RadioHead] for chat functionality via the serial port. To compile it you will need the RadioHead library installed.
+A simple application for the arduino to use [[RadioHead|https://github.com/PaulStoffregen/RadioHead]] for chat functionality via the serial port. To compile it you will need the RadioHead library installed.
 
 ## Hardware
 Hardware requirement is a module supported by the RF22 driver (e.g. RF2M23BP from HopeRF). For other rf modules supported by RdaioHead you have to adjust the line initializing the driver accordingly.
+
+## Connection diagram
+This is based on the documention of RadioHead
+[[pictures/RFM23BP_connection.png]]
 
 ## Setup
 ### Command line
