@@ -14,6 +14,7 @@ uint8_t inBytes[RH_RF22_MAX_MESSAGE_LEN];
 uint8_t status[5];
 int i = 0;
 uint8_t dest;
+bool showrssi = 0;
 
 // Instance of radio driver
 RH_RF22 driver;
@@ -49,6 +50,9 @@ void loop() {
       }
       else {
         // send mode
+        if (showrssi) {
+	  showRssi();
+        }
         Serial.print(ID);
         Serial.print("->");
         Serial.print(dest);
@@ -86,6 +90,9 @@ void rfreceive() {
     uint8_t from;
 
     if ( manager.recvfromAck(buf, &len, &from) ) {
+      if ( showrssi ) {
+	showRssi();
+      }
       Serial.print(from);
       Serial.print(" ");
       Serial.println((char*)buf);
@@ -130,6 +137,14 @@ void printstatus() {
 }
 
 
+void showRssi() {
+  uint8_t rssi = driver.lastRssi();
+  Serial.print("(RSSI: ");
+  Serial.print(rssi);
+  Serial.print(") ");
+}
+
+
 void setdestination() {
   uint16_t tmp = retrieveAddress(inBytes);
   if ( DEBUG ) Serial.println(tmp);
@@ -144,15 +159,38 @@ void setdestination() {
 
 
 void setID() {
- uint8_t tmp = retrieveAddress(inBytes);
- if ( DEBUG ) Serial.println(tmp);
- if ( tmp >= 0 && tmp <= 255 ) {
-   ID = tmp;
- } 
- if ( DEBUG ) {
+  uint8_t tmp = retrieveAddress(inBytes);
+  if ( DEBUG ) Serial.println(tmp);
+  if ( tmp >= 0 && tmp <= 255 ) {
+    ID = tmp;
+  } 
+  if ( DEBUG ) {
     Serial.print("Setting ID to: ");
     Serial.println(ID);
- }
+  }
+}
+
+
+void rssiswitch() {
+  if ( isInteger(inBytes[2]) ) {
+    uint8_t option = inBytes[2] - 48;
+    if ( DEBUG ) Serial.println(option);
+    switch ( option ) {
+      case 0:
+        Serial.println("Not showing RSSI values");
+        showrssi = false;
+        break;
+      case 1:
+	Serial.println("Showing RSSI values");
+        showrssi = true;
+        break;
+      default:
+        Serial.print("Not a valid command option: ");
+        Serial.println(option);
+        break;
+    }
+    if ( DEBUG ) Serial.println(showrssi);
+  }
 }
 
 
@@ -203,6 +241,9 @@ void command(uint8_t command) {
   case 50:
     rfstatus();
     printstatus();
+    break;
+  case 51:
+    rssiswitch();
     break;
   default:
     Serial.println("Not a valid command");

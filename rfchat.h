@@ -10,6 +10,8 @@ void rfstatus();
 
 void printstatus();
 
+void showRssi();
+
 void setdestination();
 
 void setID();
