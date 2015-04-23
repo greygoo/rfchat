@@ -11,6 +11,7 @@ int ID = 0;
 
 // Array to hold messages,
 uint8_t inBytes[RH_RF22_MAX_MESSAGE_LEN];
+uint8_t status[5];
 int i = 0;
 uint8_t dest;
 
@@ -96,7 +97,40 @@ void rfreceive() {
 }
 
 
-void setdestination(){
+void rfstatus() {
+  if ( !( status[0] = driver.statusRead()) ) { 
+    Serial.println("can't read status");
+  }
+  if ( !(status[1] = driver.adcRead()) ) {
+    Serial.println("can't read ADC");
+  }
+  if ( !(status[2] = driver.temperatureRead()) ) {
+    Serial.println("can't read temperature");
+  }
+  if ( !(status[3] = driver.wutRead()) ) {
+    Serial.println("can't read wut");
+  }
+  if ( !(status[4] = driver.ezmacStatusRead()) ) {
+    Serial.println("can't read ezmacStatus");
+  }
+}
+
+
+void printstatus() {
+  Serial.print("Staus: ");
+  Serial.println(status[0]);
+  Serial.print("ADC: ");
+  Serial.println(status[1]);
+  Serial.print("Temperature: ");
+  Serial.println(status[2]);
+  Serial.print("WUT: ");
+  Serial.println(status[3]);
+  Serial.print("ezmacStatus: ");
+  Serial.println(status[4]); 
+}
+
+
+void setdestination() {
   uint16_t tmp = retrieveAddress(inBytes);
   if ( DEBUG ) Serial.println(tmp);
   if ( tmp >= 0 && tmp <= 255 ) {
