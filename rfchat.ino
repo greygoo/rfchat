@@ -200,6 +200,10 @@ void command(uint8_t command) {
   case 49:
     setID();
     break;
+  case 50:
+    rfstatus();
+    printstatus();
+    break;
   default:
     Serial.println("Not a valid command");
     break;
